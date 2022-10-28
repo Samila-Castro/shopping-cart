@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { CartProvider, useCart } from "./hooks/CartContext";
+import { Header } from "./components/Header";
+import styled from "styled-components";
+import { Footer } from "./components/Footer";
+import { Card } from "./components/Card/Card";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export const App = () => {
+  const { cart } = useCart();
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <Wrapper>
+      <Header />
+      <Main>
+        {cart.map((product) => {
+          return <Card key={product.id} product={product} />;
+        })}
+      </Main>
+      <Footer />
+    </Wrapper>
+  );
+};
 
-export default App
+const Wrapper = styled.div`
+  min-height: 100%;
+  position: relative;
+`;
+
+const Main = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
