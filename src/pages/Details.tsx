@@ -3,15 +3,17 @@ import { Header } from "../components/Header";
 import { useParams } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { useCart } from "../hooks/CartContext";
+import { useProduct } from "../hooks/ProductContext";
 
 export const Details: React.FC = () => {
   const { id } = useParams();
-  const { cart } = useCart();
+  const { getProduct } = useProduct();
   console.log(id);
-
+  const product = getProduct(id as string);
   return (
     <>
       <Header />
+      {product?.title}
       <Footer />
     </>
   );

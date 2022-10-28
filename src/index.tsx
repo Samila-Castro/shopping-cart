@@ -6,6 +6,7 @@ import { App } from "./App";
 import "/src/global.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import { CartProvider } from "./hooks/CartContext";
+import { ProductProvider } from "./hooks/ProductContext";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <CartProvider>
+  <ProductProvider>
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>
-  </CartProvider>
+  </ProductProvider>
 );

@@ -1,16 +1,16 @@
-import { CartProvider, useCart } from "./hooks/CartContext";
+import { useProduct } from "./hooks/ProductContext";
 import { Header } from "./components/Header";
 import styled from "styled-components";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card/Card";
 
 export const App = () => {
-  const { cart } = useCart();
+  const { products } = useProduct();
   return (
     <Wrapper>
       <Header />
       <Main>
-        {cart.map((product) => {
+        {products.map((product) => {
           return <Card key={product.id} product={product} />;
         })}
       </Main>
