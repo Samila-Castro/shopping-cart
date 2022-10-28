@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../Button";
 import { Link } from "react-router-dom";
+import { useCart } from "../../hooks/CartContext";
 
 interface ProductsItemsProps {
   product: {
@@ -15,6 +16,7 @@ interface ProductsItemsProps {
 export const Card: React.FC<ProductsItemsProps> = (
   props: ProductsItemsProps
 ) => {
+  const { addProductCart } = useCart();
   return (
     <ProductCard>
       <Link to={`/product-details/${props.product.id}`}>
@@ -27,7 +29,7 @@ export const Card: React.FC<ProductsItemsProps> = (
           <Price>R${props.product.price} ou 10x 15,99</Price>
         </ContentBox>
       </Link>
-      <Button />
+      <Button actionClick={() => addProductCart(props.product)} />
     </ProductCard>
   );
 };

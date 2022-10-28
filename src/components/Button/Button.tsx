@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
-export const Button: React.FC = () => {
-  return <MainButton>Adicionar ao carrinho</MainButton>;
+interface ButtonProps {
+  actionClick: () => void;
+}
+export const Button: React.FC<ButtonProps> = ({ actionClick }) => {
+  return <MainButton onClick={actionClick}>Adicionar ao carrinho</MainButton>;
 };
 
 const MainButton = styled.button`

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Header } from "../components/Header";
 import { useParams } from "react-router-dom";
 import { Footer } from "../components/Footer";
-import { useCart } from "../hooks/CartContext";
 import { useProduct } from "../hooks/ProductContext";
 
 export const Details: React.FC = () => {
