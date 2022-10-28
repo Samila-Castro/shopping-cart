@@ -23,6 +23,7 @@ interface CartProviderProps {
 
 interface ProductsContextData {
   cart: Product[];
+  addProductCart: (product: Product) => void;
 }
 
 const CartContext = createContext<ProductsContextData>(
@@ -32,19 +33,14 @@ const CartContext = createContext<ProductsContextData>(
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Product[]>([]);
 
-  useEffect(() => {
-    api
-      .get("/products/")
-      .then((response) => {
-        setCart(response.data);
-      })
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
-  }, []);
+  const addProductCart = (product: Product) => {
+    setCart([...cart, product]);
+  };
 
   return (
-    <CartContext.Provider value={{ cart }}>{children}</CartContext.Provider>
+    <CartContext.Provider value={{ cart, addProductCart }}>
+      {children}
+    </CartContext.Provider>
   );
 }
 export function useCart() {
