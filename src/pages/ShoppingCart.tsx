@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
 export function ShoppingCart() {
-  const { cart, addProductCart, alteraQtdProduto } = useCart();
+  const { cart, addProductCart, alteraQtdProduto, removeProduct } = useCart();
   const [input, setInput] = useState("");
 
   return (
@@ -31,19 +31,29 @@ export function ShoppingCart() {
                     <Ammount>1 Unidade</Ammount>
                   </TextBox>
                 </Link>
-                <IconButton aria-label="delete">
-                  <DeleteIcon color="error" />
-                </IconButton>
-                <TextField
-                  id="outlined-number"
-                  label="Number"
-                  type="number"
-                  value={String(product.amount)}
-                  onChange={(event) =>
-                    alteraQtdProduto(product.id, Number(event.target.value))
-                  }
-                  variant="standard"
-                />
+                <Wrapper>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => removeProduct(product.id)}
+                  >
+                    <DeleteIcon color="error" />
+                  </IconButton>
+                  <TextField
+                    id="outlined-number"
+                    label="Number"
+                    type="number"
+                    value={product.amount}
+                    onChange={(event) =>
+                      alteraQtdProduto(product.id, Number(event.target.value))
+                    }
+                    InputProps={{
+                      inputProps: {
+                        min: 1,
+                      },
+                    }}
+                    variant="standard"
+                  />
+                </Wrapper>
               </Box>
             );
           })}
@@ -55,11 +65,6 @@ export function ShoppingCart() {
   );
 }
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
 const Main = styled.div`
   display: flex;
   gap: 2rem;
@@ -71,18 +76,33 @@ const Main = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-
-const Box = styled.div`
-  height: 80px;
-  max-width: 40rem;
-  background: #ffffff;
-  border-radius: 5px;
-  padding: 0.5rem;
+const Content = styled.div`
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
-const ImageBox = styled.div``;
+const Box = styled.div`
+  height: auto;
+  max-width: 40rem;
+  background: #ffffff;
+  border-radius: 5px
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+  
+`;
+
+const ImageBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const Image = styled.img`
   height: 3.5rem;
 `;
@@ -90,14 +110,20 @@ const Image = styled.img`
 const TextBox = styled.div``;
 const Title = styled.p`
   weight: 500;
-  size: 24px;
-  line-height: 29.05px;
+  size: 20px;
   color: #000000;
 `;
 
 const Ammount = styled.p`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 29px;
   color: #000000;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 `;

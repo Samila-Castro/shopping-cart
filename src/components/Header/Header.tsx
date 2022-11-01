@@ -8,7 +8,7 @@ import { MobileMenu } from "../MobileMenu";
 import { useCart } from "../../hooks/CartContext";
 
 export function Header() {
-  const { qtdProdutosCart } = useCart();
+  const { totalProductsCart } = useCart();
 
   return (
     <HeaderBox>
@@ -27,7 +27,7 @@ export function Header() {
           </Link>
         </List>
         <Link to="/cart">
-          <Badge badgeContent={qtdProdutosCart} color="error">
+          <Badge badgeContent={totalProductsCart} color="error">
             <ShoppingCartIcon sx={{ color: "#C71D1D" }} />
           </Badge>
         </Link>

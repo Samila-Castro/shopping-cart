@@ -7,21 +7,25 @@ export const Summary: React.FC<SummaryProps> = ({}) => {
   const { total } = useCart();
   return (
     <Wrapper>
-      <Box>
-        <DetailsBox>
-          <Title>Frete</Title>
-          <Title>R$ 00,00</Title>
-        </DetailsBox>
-        <DetailsBox>
-          <Discount>Desconto</Discount>
-          <Discount>-R$00</Discount>
-        </DetailsBox>
-        <DetailsBox>
-          <Total>Total</Total>
-          <Total>{total}</Total>
-        </DetailsBox>
-      </Box>
-      <Button actionClick={() => {}} text="Realizar compra" />
+      {total && (
+        <>
+          <Box>
+            <DetailsBox>
+              <Title>Frete</Title>
+              <Title>R$ 00,00</Title>
+            </DetailsBox>
+            <DetailsBox>
+              <Discount>Desconto</Discount>
+              <Discount>-R$00</Discount>
+            </DetailsBox>
+            <DetailsBox>
+              <Total>Total</Total>
+              <Total>{total}</Total>
+            </DetailsBox>
+          </Box>
+          <Button actionClick={() => {}} text="Realizar compra" />
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -31,8 +35,8 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 const Box = styled.div`
-  height: 10rem;
-  width: 20rem;
+  height: auto;
+  width: auto;
   background: #ffffff;
   border-radius: 5px;
   padding: 0.8rem;
@@ -40,6 +44,10 @@ const Box = styled.div`
   margin-bottom: 0.8rem;
   flex-direction: column;
   justify-content: space-evenly;
+
+  @media (min-width: 768px) {
+    width: 20rem;
+  }
 `;
 
 const DetailsBox = styled.div`

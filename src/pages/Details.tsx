@@ -58,6 +58,12 @@ const Box = styled.div`
 const DetailsBox = styled.div`
   display: flex;
   gap: 1rem;
+  height: auto;
+  width: auto;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 const Imagem = styled.img`
   height: 25rem;

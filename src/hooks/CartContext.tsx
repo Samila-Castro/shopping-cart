@@ -31,6 +31,7 @@ interface ProductsContextData {
   removeProduct: (productId: number) => void;
   alteraQtdProduto: (productId: number, amount: number) => void;
   total: number;
+  totalProductsCart: number;
 }
 
 const CartContext = createContext<ProductsContextData>(
@@ -41,16 +42,31 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Product[]>([]);
   const [qtdProdutosCart, setQtdProdutosCart] = useState(0);
   const [total, setTotal] = useState(0);
+  const [totalProductsCart, setTotalProductsCart] = useState(0);
+
+  useEffect(() => {
+    const total = cart.reduce((previousValue, product) => {
+      previousValue += Number(product.price) * product.amount;
+      return previousValue;
+    }, 0);
+    setTotalProductsCart(
+      cart.reduce((previousValue, product) => {
+        previousValue += product.amount;
+        return previousValue;
+      }, 0)
+    );
+
+    setTotal(total);
+  }, [cart]);
 
   const addProductCart = (product: Product) => {
     const position = cart.findIndex(
       (currentProduct) => currentProduct.id === product.id
     );
-    console.log(position);
 
     if (position !== -1) {
       const aux = cart;
-      aux[position] = { ...product, amount: product.amount + 1 };
+      aux[position] = { ...cart[position], amount: cart[position].amount + 1 };
       setCart(Object.assign([], aux));
     } else {
       product.amount = 1;
@@ -59,30 +75,6 @@ export function CartProvider({ children }: CartProviderProps) {
 
     setQtdProdutosCart(qtdProdutosCart + 1);
   };
-
-  const alteraQtdProduto = (productId: number, amount: number) => {
-    const position = cart.findIndex(
-      (currentProduct) => currentProduct.id === productId
-    );
-    console.log(position);
-
-    if (position !== -1) {
-      const product = cart[position];
-
-      const aux = cart;
-      aux[position] = { ...product, amount };
-      setCart(Object.assign([], aux));
-    }
-  };
-
-  useEffect(() => {
-    const total = cart.reduce((previousValue, product) => {
-      previousValue += Number(product.price) * product.amount;
-      return previousValue;
-    }, 0);
-
-    setTotal(total);
-  }, [cart]);
 
   const removeProduct = (productId: number) => {
     try {
@@ -100,6 +92,21 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   };
 
+  const alteraQtdProduto = (productId: number, amount: number) => {
+    if (amount === 0) amount = 1;
+    const position = cart.findIndex(
+      (currentProduct) => currentProduct.id === productId
+    );
+
+    if (position !== -1) {
+      const product = cart[position];
+
+      const aux = cart;
+      aux[position] = { ...product, amount };
+      setCart(Object.assign([], aux));
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -108,6 +115,7 @@ export function CartProvider({ children }: CartProviderProps) {
         qtdProdutosCart,
         removeProduct,
         alteraQtdProduto,
+        totalProductsCart,
         total,
       }}
     >
