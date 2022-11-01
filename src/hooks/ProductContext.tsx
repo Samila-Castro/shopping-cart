@@ -23,7 +23,7 @@ interface ProductProviderProps {
 
 interface ProductsContextData {
   products: Product[];
-  getProduct: (id: string) => Product | undefined;
+  getProduct: (id: string) => Product;
 }
 
 const ProductContext = createContext<ProductsContextData>(
@@ -45,7 +45,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
   }, []);
 
   const getProduct = (id: string) => {
-    return products.find((product) => String(product.id) === id);
+    return products.find((product) => String(product.id) === id) as Product;
   };
 
   return (

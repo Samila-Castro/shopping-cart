@@ -5,15 +5,15 @@ import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import { MobileMenu } from "../MobileMenu";
+import { useCart } from "../../hooks/CartContext";
 
 export function Header() {
+  const { qtdProdutosCart } = useCart();
+
   return (
     <HeaderBox>
       <Image src={logo} alt="logo" />
       <Box>
-        <MenuStyle>
-          <MobileMenu className="MenuTeste" />
-        </MenuStyle>
         <List>
           <Link to="/">
             <Items>INICIO</Items>
@@ -27,11 +27,14 @@ export function Header() {
           </Link>
         </List>
         <Link to="/cart">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={qtdProdutosCart} color="error">
             <ShoppingCartIcon sx={{ color: "#C71D1D" }} />
           </Badge>
         </Link>
         <Avatar src="https://github.com/samila-castro.png" />
+        <MenuStyle>
+          <MobileMenu className="MenuTeste" />
+        </MenuStyle>
       </Box>
     </HeaderBox>
   );
@@ -42,7 +45,11 @@ const HeaderBox = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 100px 20px;
+  padding: 1.5rem 100px 1.5rem;
+  height: 4rem;
+  @media screen and (max-width: 769px) {
+    padding: 1rem;
+  }
 `;
 
 const Box = styled.div`
@@ -68,12 +75,16 @@ const Items = styled.li`
 const Image = styled.img`
   height: 3rem;
   @media screen and (max-width: 768px) {
-    display: none;
+    height: 2rem;
   }
 `;
 
 const MenuStyle = styled.div`
   @media screen and (min-width: 769px) {
     display: none;
+  }
+  @media screen and (max-width: 769px) {
+    display: flex;
+    justify-content: space-between;
   }
 `;

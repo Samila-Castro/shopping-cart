@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 interface ButtonProps {
   actionClick: () => void;
+  text: string;
 }
-export const Button: React.FC<ButtonProps> = ({ actionClick }) => {
-  return <MainButton onClick={actionClick}>Adicionar ao carrinho</MainButton>;
+export const Button: React.FC<ButtonProps> = ({ actionClick, text }) => {
+  return <MainButton onClick={actionClick}>{text}</MainButton>;
 };
 
 const MainButton = styled.button`

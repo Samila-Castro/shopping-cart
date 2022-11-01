@@ -3,30 +3,38 @@ import { Header } from "./components/Header";
 import styled from "styled-components";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card/Card";
+import { useCart } from "./hooks/CartContext";
 
 export const App = () => {
   const { products } = useProduct();
+
   return (
-    <Wrapper>
-      <Header />
-      <Main>
-        {products.map((product) => {
-          return <Card key={product.id} product={product} />;
-        })}
-      </Main>
-      <Footer />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Header />
+        <Main>
+          <ProductsList>
+            {products.map((product) => {
+              return <Card key={product.id} product={product} />;
+            })}
+          </ProductsList>
+        </Main>
+        <Footer />
+      </Wrapper>
+    </>
   );
 };
 
 const Wrapper = styled.div`
-  min-height: 100%;
+  min-height: 200vh;
   position: relative;
 `;
 
 const Main = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: 100%;
+`;
+
+const ProductsList = styled.div`
   display: grid;
   gap: 1rem;
   justify-content: center;
@@ -40,6 +48,6 @@ const Main = styled.div`
   }
 
   @media (min-width: 900px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `;

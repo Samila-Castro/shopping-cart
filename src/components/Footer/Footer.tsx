@@ -17,9 +17,13 @@ const FooterBox = styled.footer`
   border-top: 1px solid #333;
 
   position: absolute;
-  bottom: 0;
+  bottom: -6.01rem;
   width: 100%;
   height: 6rem;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`

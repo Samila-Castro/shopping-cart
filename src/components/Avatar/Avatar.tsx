@@ -10,9 +10,9 @@ export const Avatar: React.FC<AvatarProps> = ({ src }) => {
 
 const ImgAvatar = styled.img`
   box-sizing: initial;
-  
   height: 2.5rem;
   border-radius: 50%;
-  border: 4px solid #202024;
+  border: 1px solid white;
   outline: 2px solid #C71D1D;
+  object-fit: cover; 
   }`;
