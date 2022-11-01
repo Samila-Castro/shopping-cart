@@ -53,7 +53,6 @@ const ProductCard = styled.div`
   color: black;
   transition: box-shadow 0.4s ease 0s
   cursor: pointer;
-  
 `;
 
 const ContentBox = styled.div``;

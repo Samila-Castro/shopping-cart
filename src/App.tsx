@@ -1,9 +1,6 @@
 import { useProduct } from "./hooks/ProductContext";
-import { Header } from "./components/Header";
 import styled from "styled-components";
-import { Footer } from "./components/Footer";
 import { Card } from "./components/Card/Card";
-import { useCart } from "./hooks/CartContext";
 import { Layout } from "./Layout";
 
 export const App = () => {
@@ -19,15 +16,6 @@ export const App = () => {
     </Layout>
   );
 };
-
-const Wrapper = styled.div`
-  min-height: 100vh;
-  position: relative;
-`;
-
-const Main = styled.div`
-  min-height: 80vh;
-`;
 
 const ProductsList = styled.div`
   display: grid;

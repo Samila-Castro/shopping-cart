@@ -1,5 +1,4 @@
 import {
-  Children,
   createContext,
   ReactNode,
   useContext,
@@ -13,10 +12,6 @@ interface Product {
   title: string;
   price: string;
   description: string;
-  amount: number;
-}
-interface UpdateProductAmount {
-  productId: number;
   amount: number;
 }
 
