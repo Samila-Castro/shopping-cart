@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { useProduct } from "../hooks/ProductContext";
 import { Card } from "../components/Card";
+import { Layout } from "../Layout";
 
 export const Details: React.FC = () => {
   const { id } = useParams();
@@ -11,16 +12,12 @@ export const Details: React.FC = () => {
   console.log(id);
   const product = getProduct(id as string);
   return (
-    <>
-      <Header />
-      <Main>
-        <DetailsBox>
-          <Imagem src={product.image} />
-          <Card key={product?.id} product={product} hideImage />
-        </DetailsBox>{" "}
-      </Main>
-      <Footer />
-    </>
+    <Layout>
+      <DetailsBox>
+        <Imagem src={product.image} />
+        <Card key={product?.id} product={product} hideImage />
+      </DetailsBox>{" "}
+    </Layout>
   );
 };
 
@@ -60,6 +57,7 @@ const DetailsBox = styled.div`
   gap: 1rem;
   height: auto;
   width: auto;
+  padding: 2rem;
 
   @media (max-width: 600px) {
     flex-direction: column;

@@ -16,10 +16,8 @@ const FooterBox = styled.footer`
   background: #202024;
   border-top: 1px solid #333;
 
-  position: absolute;
-  bottom: -6.01rem;
   width: 100%;
-  height: 6rem;
+  height: 15vh;
 
   @media (max-width: 600px) {
     display: none;

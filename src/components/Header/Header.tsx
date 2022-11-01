@@ -46,7 +46,7 @@ const HeaderBox = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 100px 1.5rem;
-  height: 4rem;
+  height: 15vh;
   @media screen and (max-width: 769px) {
     padding: 1rem;
   }

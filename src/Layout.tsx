@@ -4,19 +4,22 @@ import styled from "styled-components";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card/Card";
 import { useCart } from "./hooks/CartContext";
-import { Layout } from "./Layout";
+import React, { ReactNode } from "react";
 
-export const App = () => {
+interface LayoutProps {
+  children: ReactNode;
+}
+export const Layout = ({ children }: LayoutProps) => {
   const { products } = useProduct();
 
   return (
-    <Layout>
-      <ProductsList>
-        {products.map((product) => {
-          return <Card key={product.id} product={product} />;
-        })}
-      </ProductsList>
-    </Layout>
+    <>
+      <Wrapper>
+        <Header />
+        <Main>{children} </Main>
+        <Footer />
+      </Wrapper>
+    </>
   );
 };
 
@@ -26,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  min-height: 80vh;
+  min-height: 70vh;
 `;
 
 const ProductsList = styled.div`

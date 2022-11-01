@@ -1,14 +1,11 @@
 import { IconButton, TextField } from "@mui/material";
 import styled from "styled-components";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
 import { useCart } from "../hooks/CartContext";
-import { Button } from "../components/Button";
 import { Summary } from "../components/Summary/Summary";
-import { Select } from "@mui/material";
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
+import { Layout } from "../Layout";
 
 export function ShoppingCart() {
   const { cart, addProductCart, alteraQtdProduto, removeProduct } = useCart();
@@ -16,51 +13,51 @@ export function ShoppingCart() {
 
   return (
     <>
-      <Header />
-      <Main>
-        <Content>
-          {cart.map((product) => {
-            return (
-              <Box>
-                <ImageBox>
-                  <Image src={product.image} />
-                </ImageBox>
-                <Link to={`/product-details/${product.id}`}>
-                  <TextBox>
-                    <Title>{product.title}</Title>
-                    <Ammount>1 Unidade</Ammount>
-                  </TextBox>
-                </Link>
-                <Wrapper>
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => removeProduct(product.id)}
-                  >
-                    <DeleteIcon color="error" />
-                  </IconButton>
-                  <TextField
-                    id="outlined-number"
-                    label="Number"
-                    type="number"
-                    value={product.amount}
-                    onChange={(event) =>
-                      alteraQtdProduto(product.id, Number(event.target.value))
-                    }
-                    InputProps={{
-                      inputProps: {
-                        min: 1,
-                      },
-                    }}
-                    variant="standard"
-                  />
-                </Wrapper>
-              </Box>
-            );
-          })}
-        </Content>
-        <Summary />
-      </Main>
-      <Footer />
+      <Layout>
+        <Main>
+          <Content>
+            {cart.map((product) => {
+              return (
+                <Box>
+                  <ImageBox>
+                    <Image src={product.image} />
+                  </ImageBox>
+                  <Link to={`/product-details/${product.id}`}>
+                    <TextBox>
+                      <Title>{product.title}</Title>
+                      <Ammount>{product.amount}</Ammount>
+                    </TextBox>
+                  </Link>
+                  <Wrapper>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => removeProduct(product.id)}
+                    >
+                      <DeleteIcon color="error" />
+                    </IconButton>
+                    <TextField
+                      id="outlined-number"
+                      label="Number"
+                      type="number"
+                      value={product.amount}
+                      onChange={(event) =>
+                        alteraQtdProduto(product.id, Number(event.target.value))
+                      }
+                      InputProps={{
+                        inputProps: {
+                          min: 1,
+                        },
+                      }}
+                      variant="standard"
+                    />
+                  </Wrapper>
+                </Box>
+              );
+            })}
+          </Content>
+          <Summary />
+        </Main>
+      </Layout>
     </>
   );
 }
@@ -89,7 +86,7 @@ const Box = styled.div`
   border-radius: 5px
   display: flex;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
   
   @media (max-width: 768px) {
     display: flex;
@@ -107,7 +104,11 @@ const Image = styled.img`
   height: 3.5rem;
 `;
 
-const TextBox = styled.div``;
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const Title = styled.p`
   weight: 500;
   size: 20px;
