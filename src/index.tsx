@@ -7,11 +7,21 @@ import "/src/global.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import { CartProvider } from "./hooks/CartContext";
 import { ProductProvider } from "./hooks/ProductContext";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/product-details/:id",
