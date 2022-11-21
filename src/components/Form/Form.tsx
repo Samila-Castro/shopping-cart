@@ -38,7 +38,12 @@ export const Form: React.FC<FormProps> = ({ src }) => {
         noValidate
         autoComplete="off"
       >
-        <TextField id="outlined-basic" label="email" variant="outlined" />
+        <TextField
+          id="outlined-basic"
+          label="email"
+          variant="outlined"
+          type="email"
+        />
         <TextField
           id="outlined-basic"
           label="Password"

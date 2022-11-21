@@ -59,7 +59,7 @@ export const RegisterForm: React.FC = () => {
         noValidate
         autoComplete="off"
       >
-        <TextField label="email" variant="outlined" />
+        <TextField label="email" variant="outlined" type="email" />
         <TextField label="username" variant="outlined" />
         <TextField
           label="password"
