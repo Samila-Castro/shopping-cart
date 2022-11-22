@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-import { passwordValidate } from "../../script";
+import { passwordValidate, emailValidate } from "../../script";
 import { Avatar, Button, Fab, TextField, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -13,8 +13,10 @@ export const RegisterForm: React.FC = () => {
   const [errors, setErrors] = useState({
     password: "",
     passwordConfirmed: "",
+    email: "",
   });
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [passwordConfirmed, setPasswordConfirmed] = useState("");
 
   const submit = () => {};
@@ -28,6 +30,19 @@ export const RegisterForm: React.FC = () => {
         ...errors,
         password:
           "Minimo 1 número, 1 letra minuscula, 1 maiuscula e algum caractere especial",
+      });
+    }
+  };
+
+  const handleEmail = (value: string) => {
+    const isValid = emailValidate(value);
+    setEmail(value);
+    setErrors({ ...errors, email: "" });
+
+    if (!isValid) {
+      setErrors({
+        ...errors,
+        email: "Siga o padrão da assinatura de email",
       });
     }
   };
@@ -59,7 +74,16 @@ export const RegisterForm: React.FC = () => {
         noValidate
         autoComplete="off"
       >
-        <TextField label="email" variant="outlined" type="email" />
+        <TextField
+          label="email"
+          variant="outlined"
+          type="email"
+          onChange={(e) => {
+            handleEmail(e.target.value);
+          }}
+          error={!!errors.email}
+          helperText={errors.email}
+        />
         <TextField label="username" variant="outlined" />
         <TextField
           label="password"

@@ -1,5 +1,10 @@
 export const passwordValidate = (password: string) => {
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])(?!.*\d{2,})(?!.*[a-zA-Z]{2,})[0-9a-zA-Z$*&@#]{8,16}$/
-    return !!password.match(regex)
+  const regex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])(?!.*\d{2,})(?!.*[a-zA-Z]{2,})[0-9a-zA-Z$*&@#]{8,16}$/;
+  return !!password.match(regex);
+};
 
+export const emailValidate = (email: string) => {
+  const regex = /\S+@\S+\.\S+/;
+  return !!email.match(regex);
 };
